@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">resume</string>
+    <string name="access_label">AAA远程开机</string>
+    <string name="description">监听通知服务</string>
+    <string name="accessibility_service_label">MyLabel</string>
+</resources>
