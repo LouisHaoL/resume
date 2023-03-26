@@ -7,5 +7,4 @@
                        android:notificationTimeout="100"
                        android:accessibilityFlags="flagRequestFilterKeyEvents"
                        android:packageNames="com.tencent.mm"
-                       android:canPerformGestures="true"
                        tools:targetApi="n" />

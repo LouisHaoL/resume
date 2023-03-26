@@ -1,19 +1,17 @@
 package com.louis.resume;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationManagerCompat;
 
 public class MainActivity extends AppCompatActivity {
+    public final static String TAG = MainActivity.class.getSimpleName();
+    private PowerManager.WakeLock wakeLock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,18 +23,20 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
             startActivity(intent);
         });
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, this.getClass().getCanonicalName());
         View sendBtn = findViewById(R.id.send_noti);
         sendBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            ComponentName cn = new ComponentName("youqu.android.todesk", "youqu.android.todesk.activity.WelcomeActivity");
-            intent.setComponent(cn);
-            startActivity(intent);
+            Log.e(TAG, "保持CPU运转");
+            wakeLock.acquire();
         });
+    }
 
-        // 判断是否开启监听通知权限
-//        if (!NotificationManagerCompat.getEnabledListenerPackages(this).contains(getPackageName())) {
-//            // 去开启 监听通知权限
-//            startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
-//        }
+    @Override
+    protected void onDestroy() {
+        if (wakeLock != null && wakeLock.isHeld()) {
+            wakeLock.release();
+        }
+        super.onDestroy();
     }
 }
