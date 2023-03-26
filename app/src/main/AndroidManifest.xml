@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.louis.resume">
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />
     <application
             android:allowBackup="true"
@@ -9,16 +12,6 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.Resume">
-        <service
-                android:name=".GuardNotificationListenerService"
-                android:label="@string/accessibility_service_label"
-                android:enabled="true"
-                android:exported="true"
-                android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
-            <intent-filter>
-                <action android:name="android.service.notification.NotificationListenerService" />
-            </intent-filter>
-        </service>
         <service
                 android:name=".MyAccessibilityService"
                 android:enabled="true"

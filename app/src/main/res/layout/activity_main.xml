@@ -18,18 +18,18 @@
             android:id="@+id/textView"/>
 
     <Button android:id="@+id/acquire_access"
-            android:layout_width="100dp"
+            android:layout_width="200dp"
             android:layout_height="50dp"
-            android:text="打开设置"
+            android:text="开启无障碍功能"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent"/>
 
     <Button android:id="@+id/send_noti"
-            android:layout_width="100dp"
+            android:layout_width="200dp"
             android:layout_height="50dp"
-            android:text="唤醒ToDesk"
+            android:text="保持CPU运转"
             app:layout_constraintTop_toBottomOf="@+id/acquire_access"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
