@@ -15,12 +15,28 @@ import java.util.List;
 public class MyAccessibilityService extends AccessibilityService {
     public final static String TAG = MyAccessibilityService.class.getSimpleName();
 
+    Thread backendThread;
+
     public MyAccessibilityService() {
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        backendThread = new Thread(() -> {
+            while (true) {
+                Path path = new Path();
+                path.moveTo(550, 750);
+                path.moveTo(550, 1050);
+                dispatchGesture(new GestureDescription
+                        .Builder()
+                        .addStroke(new GestureDescription.StrokeDescription(path, 0, 100)).build(),null, null);
+                try {
+                    Thread.sleep(5 * 30 * 1000);
+                } catch (InterruptedException ignore) {
+                }
+            }
+        });
     }
 
     @Override
